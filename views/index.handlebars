@@ -1,0 +1,25 @@
+ <ul>
+        {{#each burgers}}
+            {{#unless devoured}}
+            {{> burgers/burger-block devoured=false}}
+            {{/unless}}
+        {{/each}}
+</ul>
+
+<h2> Burgers you ate</h2>
+
+<ul>
+  {{#each burgers}}
+    {{#if devoured}}
+      {{> burgers/burger-block1 devoured=true }}
+    {{/if}}
+  {{/each}}
+
+</ul>
+<form>
+    Burger:<br>
+    <input type="text" name ="burgerType" id = "burgerType">
+
+    <button id ="button">Burger</button>
+</form>
+

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Burgers</title>
+    <script src="https://code.jquery.com/jquery.js"></script>
+	<script src= "/public/assets/js/burgers.js"></script>
+</head>
+<body>
+    
+    {{{body}}}
+
+    <script>
+    
+    // This pretty much says on load of page. For some reason the ref wasnt working so included this here
+    
+
+    
+    $(function(){
+        $(".changeEat").on("click",function(event){
+            var id = $(this).data("id")
+            var newEat = $(this).data("neweat")
+
+            var newEatState = {
+                eat: newEat
+            }
+
+
+        // Once user clicks on that send a put request to update the decoured field
+        $.ajax("/api/burgers/" + id, {
+            type: "PUT",
+            data: newEatState
+        }).then(
+            function(){
+                console.log("Changed eatingstatus to", + newEat)
+                location.reload();
+            }
+        );
+
+        });
+
+    $("#button").on("click", function(event){
+        event.preventDefault();
+        typeOfBurger = {burger_name: $(burgerType).val()}
+        $.ajax("/api/burger", {
+            type: "POST",
+            data: typeOfBurger
+        }).then(
+            function(){
+                console.log("Added in Burger!")
+                location.reload();
+            }
+        );
+    });
+})
+    </script>
+
+</body>
+
+</html>
